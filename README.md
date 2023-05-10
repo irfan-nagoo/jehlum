@@ -13,17 +13,12 @@ The project Jehlum is all about refresh and exploration of various Java features
     9.  Reactive Java with RxJava library
     10. Machine Learning with Open NLP
     
-Following reference were used in this project:
 
-1. Apache Common Lang: https://commons.apache.org/proper/commons-lang/
-2. Google Guava: https://github.com/google/guava/wiki
-3. RxJava: https://github.com/ReactiveX/RxJava
-4. Open NLP: https://opennlp.apache.org/docs/2.2.0/manual/opennlp.html
-5. Stackoverflow: https://stackoverflow.com/
-6. Java docs: https://docs.oracle.com/javase/8/docs/
-7. Google: https://www.google.com/
     
     
 
 
- 
+
+
+
+
