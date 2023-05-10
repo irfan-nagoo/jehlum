@@ -1,0 +1,5 @@
+ADD 1 Tom 30 Portland
+ADD 2 Mike 34 Dearborn
+DELETE 1
+MODIFY 2 Mike 34 Chicago
+SUMMARY

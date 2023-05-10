@@ -1,0 +1,12 @@
+ADD 1 Tom 30 Portland
+ADD 2 Mike 34 Dearborn
+ADD 3 Stacy 30 Austin
+ADD 4 Jack 25 Paris
+ADD 5 Peter 38 London
+ADD 6 Prakash 31 Delhi
+DELETE 1
+MODIFY 2 Mike 34 Chicago
+MODIFY 6 Prakash 30 Mumbai
+SUMMARY
+MODIFY 6 Prakash 30 Chennai
+SUMMARY
