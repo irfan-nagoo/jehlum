@@ -25,11 +25,24 @@ public class DocumentCategorizer {
     private final DoccatModel doccatModel;
 
     public DocumentCategorizer(String tokenizerPath, String trainFilePath) throws IOException {
-        this.tokenizerME = new TokenizerME(new TokenizerModel(getInputStream(tokenizerPath)));
+        this.tokenizerME = getTokenizerME(tokenizerPath);
         this.doccatModel = getDoccatModel(trainFilePath);
     }
 
-    private DoccatModel getDoccatModel(String trainFilePath) throws IOException {
+    public String findCategory(String input) {
+        String[] tokens = tokenizerME.tokenize(input);
+        DocumentCategorizerME documentCategorizerME = new DocumentCategorizerME(doccatModel);
+        double[] result = documentCategorizerME.categorize(tokens);
+        return documentCategorizerME.getBestCategory(result);
+    }
+
+    private static TokenizerME getTokenizerME(String tokenFilePath) throws IOException {
+        try (InputStream is = getInputStream(tokenFilePath)) {
+            return new TokenizerME(new TokenizerModel(is));
+        }
+    }
+
+    private static DoccatModel getDoccatModel(String trainFilePath) throws IOException {
         // read plain text train input file
         InputStreamFactory isf = () -> getInputStream(trainFilePath);
         try (ObjectStream<DocumentSample> objStream = new DocumentSampleStream(new PlainTextByLineStream(isf,
@@ -48,13 +61,6 @@ public class DocumentCategorizer {
             trainingParameters.put(TrainingParameters.ITERATIONS_PARAM, 10);
             return DocumentCategorizerME.train("en", objStream, trainingParameters, new DoccatFactory(featureGenerators));
         }
-    }
-
-    public String findCategory(String input) {
-        String[] tokens = tokenizerME.tokenize(input);
-        DocumentCategorizerME documentCategorizerME = new DocumentCategorizerME(doccatModel);
-        double[] result = documentCategorizerME.categorize(tokens);
-        return documentCategorizerME.getBestCategory(result);
     }
 
     private static InputStream getInputStream(String modelFilePath) throws IOException {
